@@ -15,4 +15,4 @@ How to set it up:
 5. nodechecker.sh will now report your node's status every 5 minutes.
 
 
-Using the username and password in step 1, you can also login to the following URL to watch the dashboards of the nodes: https://382ac6595ff7400d9466e10bf89853a0.us-central1.gcp.cloud.es.io:9243/app/dashboards#/view/e504b420-e71d-11ea-8880-0d3256919bd5?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:Nodes,viewMode:view)
+Using the name of your node and password obtained in step 1, you can also login to the following URL to watch the status dashboards of the nodes: https://382ac6595ff7400d9466e10bf89853a0.us-central1.gcp.cloud.es.io:9243/app/dashboards#/view/e504b420-e71d-11ea-8880-0d3256919bd5?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:Nodes,viewMode:view)
