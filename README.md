@@ -6,7 +6,8 @@ Using this information, HPB can quickly notify you if there are any issues with 
 How to set it up:
 1. Request a password for your node. Send a message to "nicemans" on Telegram or to xxx on WeChat.
 
-2. Download nodechecker.sh to your node and place it in /opt/ghpb-bin/: sudo curl -o /opt/ghpb-bin/nodechecker.sh https://raw.githubusercontent.com/Nicemanss/nodechecker/master/nodechecker.sh
+2. Download nodechecker.sh to your node and place it in /opt/ghpb-bin/:
+```sudo curl -o /opt/ghpb-bin/nodechecker.sh https://raw.githubusercontent.com/Nicemanss/nodechecker/master/nodechecker.sh```
 
 3. Open nodechecker.sh with an editor and change the following to be correct: NODENAME, PASSWORD, BINARY, PORT (BINARY and PORT are already set to default, so no need to change them if you have not altered the configuration).
 
