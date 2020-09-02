@@ -7,11 +7,14 @@ How to set it up:
 1. Request a password for your node. Send a message to "nicemans" on Telegram or to xxx on WeChat.
 
 2. Download nodechecker.sh to your node and place it in /opt/ghpb-bin/:
+
 ```sudo curl -o /opt/ghpb-bin/nodechecker.sh https://raw.githubusercontent.com/Nicemanss/nodechecker/master/nodechecker.sh```
 
 3. Open nodechecker.sh with an editor and change the following to be correct: NODENAME, PASSWORD, BINARY, PORT (BINARY and PORT are already set to default, so no need to change them if you have not altered the configuration).
 
-4. Run nodechecker.sh: sudo bash /opt/ghpb-bin/nodechecker.sh
+4. Run nodechecker.sh:
+
+```sudo bash /opt/ghpb-bin/nodechecker.sh```
 
 5. nodechecker.sh will now report your node's status every 5 minutes.
 
