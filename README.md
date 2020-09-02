@@ -14,7 +14,7 @@ How to set it up:
 
 ```sudo curl -o /opt/ghpb-bin/nodechecker.sh https://raw.githubusercontent.com/Nicemanss/nodechecker/master/nodechecker.sh```
 
-4. Open nodechecker.sh with an editor and change the following to be correct: NODENAME, PASSWORD, BINARY, PORT (BINARY and PORT are already set to default, so no need to change them if you have not altered the configuration).
+4. Open nodechecker.sh with a text editor and change the following to be correct: NODENAME, PASSWORD, BINARY, PORT (BINARY and PORT are already set to default, so no need to change them if you have not altered the configuration).
 
 5. Run nodechecker.sh:
 
