@@ -4,6 +4,13 @@ cat >$CRONTAB <<EOF
 */5 * * * * root bash  /opt/ghpb-bin/nodechecker.sh  > /dev/null 2>&1
 EOF
 
+REQUIRED_PKG="jq"
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+if [ "" = "$PKG_OK" ]; then
+  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+  sudo apt-get --yes install $REQUIRED_PKG
+fi
+
 NODENAME="CHANGEME"
 PASSWORD="CHANGEME"
 BINARY=/opt/ghpb-bin/ghpb
@@ -17,17 +24,10 @@ STARTED=false
 NODETYPE=""
 TIME=`date -u +%Y-%m-%dT%H:%M:%S`
 VERSION=`$BINARY version | sed -n 2p |cut -d ' ' -f2`
-REQUIRED_PKG="jq"
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
-if [ "" = "$PKG_OK" ]; then
-  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
-  sudo apt-get --yes install $REQUIRED_PKG
-fi
-
 FILE=/tmp/blockNumber.log
-
 STARTED=`nc -z 127.0.0.1 $PORT`
 STARTED=$?
+
 if [ $STARTED -lt 1 ]; then
         STARTED=true
 
