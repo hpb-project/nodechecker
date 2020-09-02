@@ -6,7 +6,9 @@ Using this information, HPB can quickly notify you if there are any issues with 
 How to set it up:
 1. Request a password for your node. Send a message to "nicemans" on Telegram or to xxx on WeChat.
 
-2. Install curl: sudo apt install curl -y
+2. Install curl:
+
+```sudo apt install curl -y```
 
 3. Download nodechecker.sh to your node and place it in /opt/ghpb-bin/:
 
