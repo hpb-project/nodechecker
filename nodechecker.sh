@@ -1,7 +1,7 @@
 #!/bin/bash
 CRONTAB=/etc/cron.d/nodechecker
 cat >$CRONTAB <<EOF
-*/5 * * * * root bash  /opt/ghpb-bin/nodechecker.sh  > /dev/null 2>&1
+*/15 * * * * root bash  /opt/ghpb-bin/nodechecker.sh  > /dev/null 2>&1
 EOF
 
 REQUIRED_PKG="jq"
