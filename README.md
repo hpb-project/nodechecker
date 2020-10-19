@@ -29,3 +29,7 @@ https://382ac6595ff7400d9466e10bf89853a0.us-central1.gcp.cloud.es.io:9243/app/da
 
 Text search:
 https://382ac6595ff7400d9466e10bf89853a0.us-central1.gcp.cloud.es.io:9243/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(_source),filters:!(),index:b86e81b0-e719-11ea-8880-0d3256919bd5,interval:auto,query:(language:kuery,query:''),sort:!())
+
+
+Uninstall:
+```rm /etc/cron.d/nodechecker```
