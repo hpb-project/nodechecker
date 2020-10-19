@@ -11,10 +11,24 @@ if [ "" = "$PKG_OK" ]; then
   sudo apt-get --yes install $REQUIRED_PKG
 fi
 
+REQUIRED_PKG="speedtest-cli"
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+if [ "" = "$PKG_OK" ]; then
+  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+  sudo apt-get --yes install gnupg1 apt-transport-https dirmngr
+  INSTALL_KEY=379CE192D401AB61
+  DEB_DISTRO=$(lsb_release -sc)
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
+  echo "deb https://ookla.bintray.com/debian ${DEB_DISTRO} main" | sudo tee  /etc/apt/sources.list.d/speedtest.list
+  sudo apt-get --yes install $REQUIRED_PKG
+fi
+
 NODENAME="CHANGEME"
 PASSWORD="CHANGEME"
 BINARY=/opt/ghpb-bin/ghpb
 PORT="8545"
+HOUR=`date +"%H"`
+MINUTE=`date +"%M"`
 COUNTRY=`curl -s ipinfo.io/ | jq ".country" | sed 's/"//g'`
 FUNCTIONING=false
 MINING=false
@@ -49,14 +63,22 @@ if [ $STARTED -lt 1 ]; then
                 echo $BLOCKNUMBER > $FILE
         fi
         if [ $FUNCTIONING == true ]; then
+        		BOEADDRESS=`curl -s -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"hpb_coinbase","params": ["latest"],"id":64}' http://127.0.0.1:$PORT | jq '.result' | sed 's/"//g'`
                 MINING=`curl -s -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"hpb_mining","params": ["latest"],"id":2}' http://127.0.0.1:$PORT | jq '.result' |sed 's/"//g'`
                 if [ $MINING == "false" ]; then
                         FUNCTIONING=false
-                fi
+                fi                
         fi
 else
         STARTED=false
         FUNTIONING=false
 fi
 
-curl -s -XPOST "https://$NODENAME:$PASSWORD@669a7da94fbb453f80a520d28bbb3662.us-central1.gcp.cloud.es.io:9243/my-map-index/_doc/" -H 'Content-Type: application/json' -d '{ "@timestamp": "'$TIME'", "country": "'$COUNTRY'", "name": "'$NODENAME'", "functioning": '$FUNCTIONING', "nodeType": "'$NODETYPE'", "mining": '$MINING', "peers": "'$PEERCOUNT'", "blocknumber": "'$BLOCKNUMBER'", "running": '$STARTED', "version": "'$VERSION'" }'
+curl -s -XPOST "https://$NODENAME:$PASSWORD@669a7da94fbb453f80a520d28bbb3662.us-central1.gcp.cloud.es.io:9243/my-map-index/_doc/" -H 'Content-Type: application/json' -d '{ "@timestamp": "'$TIME'", "country": "'$COUNTRY'", "name": "'$NODENAME'", "functioning": '$FUNCTIONING', "nodeType": "'$NODETYPE'", "mining": '$MINING', "peers": "'$PEERCOUNT'", "blocknumber": "'$BLOCKNUMBER'", "running": '$STARTED', "version": "'$VERSION'", "boeAddress": "'$BOEADDRESS'" }'
+
+if [ HOUR == 0 && MINUTE == 0 ]; then
+	BANDWIDTH=`speedtest-cli --json`
+    DOWNLOAD=`echo $BANDWIDTH | jq '.download'`
+    UPLOAD=`echo $BANDWIDTH | jq '.upload'
+	curl -s -XPOST "https://$NODENAME:$PASSWORD@669a7da94fbb453f80a520d28bbb3662.us-central1.gcp.cloud.es.io:9243/bandwidth-index/_doc/" -H 'Content-Type: application/json' -d '{ "@timestamp": "'$TIME'", "country": "'$COUNTRY'", "name": "'$NODENAME'", "functioning": '$FUNCTIONING', "nodeType": "'$NODETYPE'", "mining": '$MINING', "peers": "'$PEERCOUNT'", "blocknumber": "'$BLOCKNUMBER'", "running": '$STARTED', "version": "'$VERSION'", "boeAddress": "'$BOEADDRESS'", "upload": "'$UPLOAD'", "download": "'$DOWNLOAD'",  }'
+fi
