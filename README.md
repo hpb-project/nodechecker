@@ -1,6 +1,6 @@
 # Nodechecker
 Reports the status of your HPB node.
-It reports if the node is MINING, PEERCOUNT, CURRENT BLOCKNUMBER, IF STARTED, NODE TYPE (HpNode), VERSION.
+It reports if the node is MINING, PEERCOUNT, CURRENT BLOCKNUMBER, IF STARTED, NODE TYPE (HpNode), VERSION, BOE ADDRESS and UPLOAD/DOWNLOAD SPEED.
 Using this information, HPB can quickly notify you if there are any issues with your node, and get an overview of the health of the network.
 
 How to set it up:
@@ -20,7 +20,7 @@ How to set it up:
 
 ```sudo bash /opt/ghpb-bin/nodechecker.sh```
 
-6. nodechecker.sh will now report your node's status every 5 minutes.
+6. nodechecker.sh will now report your node's status every 15 minutes and run a bandwidth test at midnight.
 
 
 Using the name of your node and password obtained in step 1, you can also login to the following URLs to watch:
