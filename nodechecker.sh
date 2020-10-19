@@ -78,7 +78,9 @@ curl -s -XPOST "https://$NODENAME:$PASSWORD@669a7da94fbb453f80a520d28bbb3662.us-
 
 if [ $HOUR == 00 ] && [ $MINUTE == 00 ]; then
         BANDWIDTH=`speedtest-cli --json`
-        DOWNLOAD=`echo $BANDWIDTH | jq '.download'`
-        UPLOAD=`echo $BANDWIDTH | jq '.upload'`
+        DOWNLOAD=`echo $BANDWIDTH | jq '.download' | cut -d '.' -f1`
+        DOWNLOAD=`echo $(( $DOWNLOAD / 1000000 ))`
+        UPLOAD=`echo $BANDWIDTH | jq '.upload' | cut -d '.' -f1`
+        UPLOAD=`echo $(( $UPLOAD / 1000000 ))`
         curl -s -XPOST "https://$NODENAME:$PASSWORD@669a7da94fbb453f80a520d28bbb3662.us-central1.gcp.cloud.es.io:9243/bandwidth-index/_doc/" -H 'Content-Type: application/json' -d '{ "@timestamp": "'$TIME'", "country": "'$COUNTRY'", "name": "'$NODENAME'", "functioning": '$FUNCTIONING', "nodeType": "'$NODETYPE'", "mining": '$MINING', "peers": "'$PEERCOUNT'", "blocknumber": "'$BLOCKNUMBER'", "running": '$STARTED', "version": "'$VERSION'", "boeAddress": "'$BOEADDRESS'", "upload": "'$UPLOAD'", "download": "'$DOWNLOAD'" }'
 fi
