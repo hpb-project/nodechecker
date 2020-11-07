@@ -23,8 +23,8 @@ if [ "" = "$PKG_OK" ]; then
   sudo apt-get --yes install $REQUIRED_PKG
 fi
 
-NODENAME="CHANGEME"
-PASSWORD="CHANGEME"
+NODENAME="***"
+PASSWORD="***"
 BINARY=/opt/ghpb-bin/ghpb
 PORT="8545"
 HOUR=`date +"%H"`
