@@ -25,7 +25,7 @@ fi
 
 NODENAME="***"
 PASSWORD="***"
-BINARY=/opt/ghpb-bin/ghpb
+BINARY=/home/ghpb-bin/ghpb
 PORT="8545"
 HOUR=`date +"%H"`
 MINUTE=`date +"%M"`
